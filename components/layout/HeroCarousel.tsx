@@ -52,28 +52,31 @@ export default function HeroCarousel() {
                                     className="object-cover opacity-70 scale-105 animate-in fade-in zoom-in duration-1000"
                                     priority={index === 0}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
                             </div>
 
-                            <div className="container relative z-10 flex h-full flex-col justify-center items-center text-center space-y-8">
-                                <div className="glass p-6 md:p-10 rounded-2xl max-w-2xl animate-fade-up backdrop-blur-md border-white/10">
-                                    <h1 className="text-5xl font-bold tracking-tighter sm:text-7xl lg:text-8xl text-white mb-6">
+                            <div className="container relative z-10 flex h-full flex-col justify-center items-start text-left pl-8 md:pl-20">
+                                <div className="max-w-3xl animate-fade-up space-y-8">
+                                    <div className="inline-block px-4 py-1.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white/90 text-sm font-medium tracking-widest uppercase mb-4">
+                                        New Collection 2025
+                                    </div>
+                                    <h1 className="text-5xl font-bold tracking-tighter sm:text-7xl lg:text-8xl text-white drop-shadow-2xl leading-[1.1]">
                                         {image.title}
                                     </h1>
-                                    <p className="max-w-2xl mx-auto text-lg text-gray-200 sm:text-xl font-light tracking-wide mb-8">
+                                    <p className="max-w-xl text-lg text-gray-200 sm:text-xl font-light tracking-wide leading-relaxed drop-shadow-lg">
                                         {image.description}
                                     </p>
-                                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <div className="flex flex-col sm:flex-row gap-6 pt-6">
                                         <Button
                                             size="lg"
-                                            className="h-14 px-8 text-lg rounded-full bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white shadow-lg shadow-violet-500/25 transition-all hover:scale-105"
+                                            className="h-14 px-10 text-lg rounded-full bg-white text-black hover:bg-gray-100 transition-all hover:scale-105 font-medium shadow-[0_0_20px_rgba(255,255,255,0.3)]"
                                         >
                                             Shop Collection
                                         </Button>
                                         <Button
                                             size="lg"
                                             variant="outline"
-                                            className="h-14 px-8 text-lg rounded-full bg-white/10 border-white/20 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-105"
+                                            className="h-14 px-10 text-lg rounded-full border-white bg-transparent text-white hover:bg-white/10 backdrop-blur-sm transition-all hover:scale-105 font-medium"
                                         >
                                             View Lookbook
                                         </Button>
