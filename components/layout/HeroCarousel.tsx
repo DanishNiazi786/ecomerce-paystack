@@ -32,7 +32,7 @@ const bannerImages = [
 
 export default function HeroCarousel() {
     const plugin = React.useRef(
-        Autoplay({ delay: 6000, stopOnInteraction: true })
+        Autoplay({ delay: 6000, stopOnInteraction: false })
     );
 
     return (
@@ -40,8 +40,6 @@ export default function HeroCarousel() {
             <Carousel
                 plugins={[plugin.current]}
                 className="w-full h-full"
-                onMouseEnter={plugin.current.stop}
-                onMouseLeave={plugin.current.reset}
             >
                 <CarouselContent className="h-full ml-0">
                     {bannerImages.map((image, index) => (
@@ -58,7 +56,7 @@ export default function HeroCarousel() {
                             </div>
 
                             <div className="container relative z-10 flex h-full flex-col justify-center items-center text-center space-y-8">
-                                <div className="glass p-8 md:p-12 rounded-2xl max-w-4xl animate-fade-up backdrop-blur-md border-white/10">
+                                <div className="glass p-6 md:p-10 rounded-2xl max-w-2xl animate-fade-up backdrop-blur-md border-white/10">
                                     <h1 className="text-5xl font-bold tracking-tighter sm:text-7xl lg:text-8xl text-white mb-6">
                                         {image.title}
                                     </h1>
