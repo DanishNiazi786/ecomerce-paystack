@@ -51,7 +51,7 @@ export default function HeroCarousel() {
                                     src={image.src}
                                     alt={image.title}
                                     fill
-                                    className="object-cover opacity-70 scale-105 animate-in fade-in zoom-in duration-[2000ms]"
+                                    className="object-cover opacity-70 scale-105 animate-in fade-in zoom-in duration-1000"
                                     priority={index === 0}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
