@@ -30,7 +30,10 @@ export async function POST(request: NextRequest) {
                     amount: Math.round(amount * 100), // Convert to cents (KES uses cents)
                     currency: "KES",
                     reference: reference,
-                    metadata: metadata,
+                    metadata: {
+                        ...metadata,
+                        reference: reference,
+                    },
                     callback_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/payment/callback`,
                 }),
             }

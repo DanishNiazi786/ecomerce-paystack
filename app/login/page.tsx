@@ -18,7 +18,25 @@ export default function LoginPage() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            router.push("/");
+            // Get redirect URL from query params or default
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirect = urlParams.get('redirect') || '/';
+
+            // Check if user is admin and redirect accordingly
+            const checkUserRole = async () => {
+                try {
+                    const response = await fetch("/api/auth/me");
+                    const data = await response.json();
+                    if (data.success && data.user?.role === "admin" && redirect === '/') {
+                        router.push("/admin");
+                    } else {
+                        router.push(redirect);
+                    }
+                } catch (error) {
+                    router.push(redirect);
+                }
+            };
+            checkUserRole();
         }
     }, [isAuthenticated, router]);
 
@@ -33,7 +51,16 @@ export default function LoginPage() {
                 title: "Login Successful",
                 description: "Welcome back!",
             });
-            router.push("/");
+            // Get redirect URL from query params or default
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirect = urlParams.get('redirect') || '/';
+
+            // Check if user is admin and redirect accordingly
+            if (result.user?.role === "admin" && redirect === '/') {
+                router.push("/admin");
+            } else {
+                router.push(redirect);
+            }
         } else {
             toast({
                 title: "Login Failed",
@@ -98,7 +125,7 @@ export default function LoginPage() {
                 </form>
 
                 <div className="text-center text-sm">
-                    <span className="text-muted-foreground">Don't have an account? </span>
+                    <span className="text-muted-foreground">Don&apos;t have an account? </span>
                     <Link href="/signup" className="text-violet-500 hover:text-violet-600 font-medium">
                         Sign up
                     </Link>

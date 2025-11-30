@@ -14,7 +14,7 @@ interface AuthState {
     isAuthenticated: boolean;
     isLoading: boolean;
     setUser: (user: User | null) => void;
-    login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
+    login: (email: string, password: string) => Promise<{ success: boolean; message: string; user?: User }>;
     register: (name: string, email: string, password: string) => Promise<{ success: boolean; message: string }>;
     sendOTP: (email: string) => Promise<{ success: boolean; message: string }>;
     verifyOTP: (email: string, otp: string, name: string, password: string) => Promise<{ success: boolean; message: string }>;
@@ -48,7 +48,7 @@ export const useAuthStore = create<AuthState>()(
 
                     if (data.success && data.user) {
                         set({ user: data.user, isAuthenticated: true, isLoading: false });
-                        return { success: true, message: data.message };
+                        return { success: true, message: data.message, user: data.user };
                     } else {
                         set({ isLoading: false });
                         return { success: false, message: data.message || 'Login failed' };

@@ -38,22 +38,22 @@ export default function SignupPage() {
         // More strict email validation
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const isValid = emailRegex.test(email) && email.length <= 254;
-        
+
         // Additional checks
         if (!isValid) return false;
-        
+
         // Check for common invalid patterns
         if (email.includes('..')) return false;
         if (email.startsWith('.') || email.startsWith('@')) return false;
         if (email.includes('@.') || email.includes('.@')) return false;
-        
+
         return true;
     };
 
     const handleEmailChange = (value: string) => {
         setEmail(value);
         setEmailTouched(true);
-        
+
         // Only validate if user has typed something
         if (value.trim().length > 0) {
             // Don't show valid until email is complete (has @ and domain)
@@ -115,7 +115,7 @@ export default function SignupPage() {
             setStep("otp");
         } else {
             // Check if error is about duplicate email
-            if (result.message.toLowerCase().includes('already exists') || 
+            if (result.message.toLowerCase().includes('already exists') ||
                 result.message.toLowerCase().includes('already registered')) {
                 toast({
                     title: "Email Already Registered",
@@ -171,7 +171,7 @@ export default function SignupPage() {
         setIsSubmitting(true);
         const trimmedEmail = email.trim();
         const result = await sendOTP(trimmedEmail);
-        
+
         if (result.success) {
             toast({
                 title: "OTP Resent",
@@ -199,7 +199,7 @@ export default function SignupPage() {
                             Verify Your Email
                         </h1>
                         <p className="mt-2 text-muted-foreground">
-                            We've sent a 6-digit code to <strong>{email}</strong>
+                            We&apos;ve sent a 6-digit code to <strong>{email}</strong>
                         </p>
                     </div>
 
@@ -316,12 +316,12 @@ export default function SignupPage() {
                                 </div>
                             )}
                         </div>
-                            {emailTouched && email.length > 0 && emailValid === false && (
-                                <p className="text-xs flex items-center gap-1 text-red-600 dark:text-red-400">
-                                    <XCircle className="h-3 w-3" />
-                                    Invalid email format. Please check and try again.
-                                </p>
-                            )}
+                        {emailTouched && email.length > 0 && emailValid === false && (
+                            <p className="text-xs flex items-center gap-1 text-red-600 dark:text-red-400">
+                                <XCircle className="h-3 w-3" />
+                                Invalid email format. Please check and try again.
+                            </p>
+                        )}
                     </div>
 
                     <div className="space-y-2">

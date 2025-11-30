@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { MobileNav } from "@/components/layout/MobileNav";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
   children,
@@ -34,6 +35,7 @@ export default function RootLayout({
           <MobileNav />
           <Footer />
           <Toaster />
+          <SonnerToaster />
         </ThemeProvider>
       </body>
     </html>

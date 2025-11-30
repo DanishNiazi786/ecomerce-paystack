@@ -105,8 +105,9 @@ export default function Navbar() {
                     {isAuthenticated && user ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon" className="hidden md:flex rounded-full hover:bg-secondary/80">
-                                    <User className="h-5 w-5" />
+                                <Button variant="ghost" size="sm" className="hidden md:flex rounded-full hover:bg-secondary/80 gap-2">
+                                    <User className="h-4 w-4" />
+                                    <span className="text-sm font-medium">Hi, {user.name.split(' ')[0]}</span>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="w-56">
@@ -117,12 +118,22 @@ export default function Navbar() {
                                     </div>
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem asChild>
-                                    <Link href="/profile" className="cursor-pointer">
-                                        <User className="mr-2 h-4 w-4" />
-                                        Profile
-                                    </Link>
-                                </DropdownMenuItem>
+                                {user.role !== 'admin' && (
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/account" className="cursor-pointer">
+                                            <User className="mr-2 h-4 w-4" />
+                                            My Account
+                                        </Link>
+                                    </DropdownMenuItem>
+                                )}
+                                {user.role === 'admin' && (
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/admin" className="cursor-pointer">
+                                            <User className="mr-2 h-4 w-4" />
+                                            Admin Panel
+                                        </Link>
+                                    </DropdownMenuItem>
+                                )}
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-red-500">
                                     <LogOut className="mr-2 h-4 w-4" />

@@ -8,6 +8,10 @@ A premium, high-performance e-commerce store built with Next.js 15, Tailwind CSS
 - **Product Management**: Browse by category, view details, and filter products.
 - **Shopping Cart**: Fully functional cart with persistent state.
 - **Wishlist**: Save items for later.
+- **User Authentication**: Sign up, login, OTP verification.
+- **Payment Integration**: Full Paystack integration with KES currency.
+- **Admin Panel**: Complete admin dashboard for managing products, orders, and categories.
+- **Order Management**: Automatic order creation, inventory management, and email confirmations.
 - **Responsive**: Optimized for mobile, tablet, and desktop.
 - **SEO Optimized**: Metadata, OpenGraph, and semantic HTML.
 
@@ -46,7 +50,18 @@ A premium, high-performance e-commerce store built with Next.js 15, Tailwind CSS
    npx tsx scripts/seed.ts
    ```
 
-5. **Run the development server**
+5. **Create admin user**
+   Create the first admin user for accessing the admin panel:
+   ```bash
+   npm run seed:admin
+   ```
+   Default credentials:
+   - Email: `admin@yourstore.com`
+   - Password: `Admin@123`
+   
+   **⚠️ Change the password in `scripts/seed-admin.ts` before production!**
+
+6. **Run the development server**
    ```bash
    npm run dev
    ```
@@ -63,6 +78,30 @@ A premium, high-performance e-commerce store built with Next.js 15, Tailwind CSS
 - `store/`: Zustand state stores.
 - `types/`: TypeScript type definitions.
 
+## Admin Panel
+
+Access the admin panel at `/admin` (requires admin role).
+
+### Features:
+- **Dashboard**: Sales statistics, order counts, recent orders
+- **Products**: Create, edit, delete products with full inventory management
+- **Orders**: View orders, update status, print invoices
+- **Categories**: Manage product categories
+
+See `MILESTONE_2_COMPLETE.md` for detailed admin panel documentation.
+
 ## Deployment
 
 The project is ready for deployment on Vercel. Simply connect your GitHub repository and deploy.
+
+### Environment Variables for Production:
+- `MONGODB_URI` - MongoDB connection string
+- `JWT_SECRET` - Secret key for JWT tokens
+- `PAYSTACK_SECRET_KEY` - Paystack secret key (use live key in production)
+- `NEXT_PUBLIC_BASE_URL` - Your production URL
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM` - Email configuration
+
+### Paystack Webhook Setup:
+1. Go to Paystack Dashboard → Settings → Webhooks
+2. Add webhook URL: `https://yourdomain.com/api/paystack/webhook`
+3. Select event: `charge.success`
