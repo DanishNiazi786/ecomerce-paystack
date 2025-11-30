@@ -49,6 +49,7 @@ export default function HeroCarousel() {
                                     src={image.src}
                                     alt={image.title}
                                     fill
+                                    sizes="100vw"
                                     className="object-cover opacity-70 scale-105 animate-in fade-in zoom-in duration-1000"
                                     priority={index === 0}
                                 />

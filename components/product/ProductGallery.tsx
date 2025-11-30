@@ -30,6 +30,7 @@ export function ProductGallery({ images }: ProductGalleryProps) {
                             src={image}
                             alt={`Product image ${index + 1}`}
                             fill
+                            sizes="(max-width: 768px) 20vw, 10vw"
                             className="object-cover"
                         />
                     </button>
@@ -42,6 +43,7 @@ export function ProductGallery({ images }: ProductGalleryProps) {
                     src={selectedImage}
                     alt="Product image"
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover transition-all duration-500 hover:scale-110 cursor-zoom-in"
                     priority
                 />
