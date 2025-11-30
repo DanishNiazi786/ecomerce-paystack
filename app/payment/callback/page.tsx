@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCartStore } from "@/store/useCartStore";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export default function PaymentCallbackPage() {
+function PaymentCallbackContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { clearCart } = useCartStore();
@@ -108,6 +108,27 @@ export default function PaymentCallbackPage() {
                 </>
             )}
         </div>
+    );
+}
+
+function LoadingFallback() {
+    return (
+        <div className="container py-16 max-w-md mx-auto text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <h1 className="text-2xl font-bold mb-2">Loading...</h1>
+            <p className="text-muted-foreground">Please wait...</p>
+        </div>
+    );
+}
+
+// Force dynamic rendering since we use search params
+export const dynamic = 'force-dynamic';
+
+export default function PaymentCallbackPage() {
+    return (
+        <Suspense fallback={<LoadingFallback />}>
+            <PaymentCallbackContent />
+        </Suspense>
     );
 }
 
