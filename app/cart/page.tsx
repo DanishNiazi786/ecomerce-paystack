@@ -55,7 +55,7 @@ export default function CartPage() {
                                                 {item.name}
                                             </Link>
                                         </h3>
-                                        <p className="text-sm text-muted-foreground">Price: ${item.price}</p>
+                                        <p className="text-sm text-muted-foreground">Price: KSh {item.price.toLocaleString()}</p>
                                     </div>
                                     <Button
                                         variant="ghost"
@@ -89,7 +89,7 @@ export default function CartPage() {
                                         </Button>
                                     </div>
                                     <div className="ml-auto font-bold">
-                                        ${(item.price * item.quantity).toFixed(2)}
+                                        KSh {(item.price * item.quantity).toLocaleString()}
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@ export default function CartPage() {
                         <div className="space-y-2 mb-4">
                             <div className="flex justify-between">
                                 <span className="text-muted-foreground">Subtotal</span>
-                                <span className="font-medium">${totalPrice().toFixed(2)}</span>
+                                <span className="font-medium">KSh {totalPrice().toLocaleString()}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-muted-foreground">Shipping</span>
@@ -118,7 +118,7 @@ export default function CartPage() {
                         <div className="border-t pt-4 mb-6">
                             <div className="flex justify-between text-lg font-bold">
                                 <span>Total</span>
-                                <span>${totalPrice().toFixed(2)}</span>
+                                <span>KSh {totalPrice().toLocaleString()}</span>
                             </div>
                         </div>
                         <Button className="w-full" size="lg" asChild>

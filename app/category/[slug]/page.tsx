@@ -58,19 +58,19 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
                                     <div className="space-y-2">
                                         <div className="flex items-center space-x-2">
                                             <Checkbox id="price-1" />
-                                            <Label htmlFor="price-1">Under $50</Label>
+                                            <Label htmlFor="price-1">Under KSh 5,000</Label>
                                         </div>
                                         <div className="flex items-center space-x-2">
                                             <Checkbox id="price-2" />
-                                            <Label htmlFor="price-2">$50 - $100</Label>
+                                            <Label htmlFor="price-2">KSh 5,000 - KSh 10,000</Label>
                                         </div>
                                         <div className="flex items-center space-x-2">
                                             <Checkbox id="price-3" />
-                                            <Label htmlFor="price-3">$100 - $200</Label>
+                                            <Label htmlFor="price-3">KSh 10,000 - KSh 20,000</Label>
                                         </div>
                                         <div className="flex items-center space-x-2">
                                             <Checkbox id="price-4" />
-                                            <Label htmlFor="price-4">Over $200</Label>
+                                            <Label htmlFor="price-4">Over KSh 20,000</Label>
                                         </div>
                                     </div>
                                 </AccordionContent>

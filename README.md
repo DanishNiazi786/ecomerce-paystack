@@ -30,10 +30,15 @@ A premium, high-performance e-commerce store built with Next.js 15, Tailwind CSS
    ```
 
 3. **Set up environment variables**
-   Create a `.env.local` file in the root directory and add your MongoDB URI:
+   Create a `.env.local` file in the root directory (copy from `.env.local.example`):
    ```env
    MONGODB_URI=your_mongodb_connection_string
+   SMTP_USER=your-email@gmail.com
+   SMTP_PASS=your-app-password
+   JWT_SECRET=your-secret-key
    ```
+   
+   **For Email Setup (OTP):** See `SETUP_EMAIL.md` for detailed instructions on configuring Gmail or other email services.
 
 4. **Seed the database**
    Populate the database with initial data:

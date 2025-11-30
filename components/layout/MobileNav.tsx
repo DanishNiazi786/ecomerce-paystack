@@ -3,17 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Search, ShoppingBag, Heart, User } from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
 import { cn } from "@/lib/utils";
 
 export function MobileNav() {
     const pathname = usePathname();
+    const { isAuthenticated } = useAuthStore();
 
     const links = [
         { href: "/", icon: Home, label: "Home" },
         { href: "/search", icon: Search, label: "Search" },
         { href: "/cart", icon: ShoppingBag, label: "Cart" },
         { href: "/wishlist", icon: Heart, label: "Wishlist" },
-        { href: "/profile", icon: User, label: "Profile" },
+        { href: isAuthenticated ? "/profile" : "/login", icon: User, label: isAuthenticated ? "Profile" : "Login" },
     ];
 
     return (

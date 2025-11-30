@@ -1,20 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, Heart, Search, Menu, User, Sun, Moon } from "lucide-react";
+import { ShoppingCart, Heart, Search, Menu, User, Sun, Moon, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCartStore } from "@/store/useCartStore";
 import { useWishlistStore } from "@/store/useWishlistStore";
+import { useAuthStore } from "@/store/useAuthStore";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
     const cartItems = useCartStore((state) => state.items);
     const wishlistItems = useWishlistStore((state) => state.items);
+    const { user, isAuthenticated, checkAuth, logout } = useAuthStore();
     const { setTheme, theme } = useTheme();
+    const router = useRouter();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -25,6 +37,15 @@ export default function Navbar() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    useEffect(() => {
+        checkAuth();
+    }, [checkAuth]);
+
+    const handleLogout = async () => {
+        await logout();
+        router.push("/");
+    };
 
     return (
         <header
@@ -81,9 +102,41 @@ export default function Navbar() {
                         <span className="sr-only">Toggle theme</span>
                     </Button>
 
-                    <Button variant="ghost" size="icon" className="hidden md:flex rounded-full hover:bg-secondary/80">
-                        <User className="h-5 w-5" />
-                    </Button>
+                    {isAuthenticated && user ? (
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon" className="hidden md:flex rounded-full hover:bg-secondary/80">
+                                    <User className="h-5 w-5" />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-56">
+                                <DropdownMenuLabel>
+                                    <div className="flex flex-col space-y-1">
+                                        <p className="text-sm font-medium">{user.name}</p>
+                                        <p className="text-xs text-muted-foreground">{user.email}</p>
+                                    </div>
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem asChild>
+                                    <Link href="/profile" className="cursor-pointer">
+                                        <User className="mr-2 h-4 w-4" />
+                                        Profile
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-red-500">
+                                    <LogOut className="mr-2 h-4 w-4" />
+                                    Logout
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    ) : (
+                        <Link href="/login">
+                            <Button variant="ghost" size="icon" className="hidden md:flex rounded-full hover:bg-secondary/80">
+                                <User className="h-5 w-5" />
+                            </Button>
+                        </Link>
+                    )}
 
                     <Link href="/wishlist">
                         <Button variant="ghost" size="icon" className="relative rounded-full hover:bg-secondary/80">

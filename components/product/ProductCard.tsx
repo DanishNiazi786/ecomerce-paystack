@@ -137,14 +137,14 @@ export function ProductCard({ product }: ProductCardProps) {
                             {product.discountPrice ? (
                                 <>
                                     <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-cyan-500">
-                                        ${product.discountPrice}
+                                        KSh {product.discountPrice.toLocaleString()}
                                     </span>
                                     <span className="text-sm text-muted-foreground line-through decoration-red-500/50">
-                                        ${product.price}
+                                        KSh {product.price.toLocaleString()}
                                     </span>
                                 </>
                             ) : (
-                                <span className="text-xl font-bold">${product.price}</span>
+                                <span className="text-xl font-bold">KSh {product.price.toLocaleString()}</span>
                             )}
                         </div>
                     </CardContent>

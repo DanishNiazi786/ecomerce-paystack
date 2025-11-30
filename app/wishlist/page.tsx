@@ -80,7 +80,7 @@ export default function WishlistPage() {
                                 </Link>
                             </h3>
                             <div className="mt-auto flex items-center justify-between pt-4">
-                                <span className="text-lg font-bold">${item.price}</span>
+                                <span className="text-lg font-bold">KSh {item.price.toLocaleString()}</span>
                                 <Button size="sm" onClick={() => handleMoveToCart(item)}>
                                     <ShoppingCart className="mr-2 h-4 w-4" /> Move to Cart
                                 </Button>
